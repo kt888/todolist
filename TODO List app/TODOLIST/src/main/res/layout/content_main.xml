@@ -27,7 +27,7 @@
         android:layout_width="75dp"
         android:layout_height="72dp"
         android:textColor="@color/material_blue_grey_800"
-        android:textSize="65sp"
+        android:textSize="50sp"
         android:background="@drawable/button_custom"
         android:layout_centerHorizontal="true"/>
 </RelativeLayout>

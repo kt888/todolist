@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -16,8 +19,17 @@ public class MainActivity extends AppCompatActivity {
         /* The listActivity must be called. This displays the
          * list of items. The object mDbHelper must be passed.
          */
+        TextView title = (TextView) findViewById(R.id.title);
         final Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
+        title.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                startActivity(intent);
+                return false;
+            }
+        });
+
+
     }
 
     @Override
