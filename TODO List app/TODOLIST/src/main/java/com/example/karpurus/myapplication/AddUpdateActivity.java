@@ -109,6 +109,7 @@ public class AddUpdateActivity extends AppCompatActivity {
     public void setValues(EditText itemBar, String oldItem){
         isUpdate = true;
         itemBar.setText(oldItem);
+        itemBar.setSelection(oldItem.length());
     }
 
     public void getValues(){
