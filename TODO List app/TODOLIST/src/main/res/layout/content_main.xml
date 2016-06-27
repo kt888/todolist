@@ -16,7 +16,7 @@
 
     <TextView
 
-        android:text="TO DO LIST"
+        android:text="     RUTINA"
         android:id="@+id/title"
         android:layout_marginTop="166dp"
         android:layout_width="75dp"
