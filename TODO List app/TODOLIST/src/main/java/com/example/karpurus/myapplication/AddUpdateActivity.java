@@ -148,6 +148,10 @@ public class AddUpdateActivity extends AppCompatActivity {
         itemBar.setText(oldItem);
         itemBar.setSelection(oldItem.length());
         dateView.setText(dateString);
+        String[] dateArray = dateString.split("/");
+        year = Integer.parseInt(dateArray[0]);
+        month = Integer.parseInt(dateArray[1]);
+        day = Integer.parseInt(dateArray[2]);
         int position = 0;
         switch (priority) {
             case "high":
