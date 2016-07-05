@@ -14,7 +14,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "itemName";
+    public final static String EXTRA_MESSAGE_IN = "itemName";
+    public final static String EXTRA_MESSAGE_IP = "itemPriority";
+    public final static String EXTRA_MESSAGE_ID = "itemDate";
+    public final static String EXTRA_MESSAGE = "from";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     /*
-    * This method iterates over all the items in the
+    *This method iterates over all the items in the
     * database, retrieves it and an arraylist is populated
     * The contents of the arraylist are displayed using ListView
     */
@@ -50,7 +53,9 @@ public class ListActivity extends AppCompatActivity {
         String[] projection = {
                 FeedReaderContract.FeedEntry._ID,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_ENTRY_ID,
-                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE
+                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY,
+                FeedReaderContract.FeedEntry.COLUMN_NAME_DATE
         };
 
         Cursor c = db.query(
@@ -64,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
         );
         c.moveToFirst();
         final ListView itemList = (ListView) findViewById(R.id.listView);
-        final ArrayList<String> items = new ArrayList<String>();
+        final ArrayList<toDoItem> items = new ArrayList<toDoItem>();
         /*
          *Iterating through the rows in database
          */
@@ -75,16 +80,24 @@ public class ListActivity extends AppCompatActivity {
             String item = c.getString(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE)
 
             );
+            String priority = c.getString(c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_PRIORITY)
+
+            );
+            int date = c.getInt(
+                    c.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE)
+            );
+
             /* Adding to the arraylist items*/
-            items.add(item);
+            toDoItem itemObject = new toDoItem();
+            itemObject.itemName = item;
+            itemObject.priority = priority;
+            itemObject.dueDate = convertDateToString(date);
+            items.add(itemObject);
             c.moveToNext();
         }
 
         /* The arraylist obtained from the database is populated as a list */
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_expandable_list_item_1,
-                items);
+        ItemAdapter arrayAdapter = new ItemAdapter(this, items);
 
         /*
          * If an item in the list is clicked
@@ -97,11 +110,23 @@ public class ListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(ListActivity.this, TaskActivity.class);
-                String nameOfItemClicked = items.get(position);
-                intent.putExtra(EXTRA_MESSAGE, nameOfItemClicked);
+                int positionOfItemClicked = itemList.getSelectedItemPosition();
+                String nameOfItemClicked = items.get(position).itemName;
+                String priorityOfItemClicked = items.get(position).priority;
+                String dueDate = items.get(position).dueDate;
+                intent.putExtra(EXTRA_MESSAGE_IN, nameOfItemClicked);
+                intent.putExtra(EXTRA_MESSAGE_IP, priorityOfItemClicked);
+                intent.putExtra(EXTRA_MESSAGE_ID, dueDate);
                 startActivity(intent);
             }
         });
 
+    }
+
+    public String convertDateToString(int date){
+        StringBuffer dateString = new StringBuffer(Integer.toString(date));
+        dateString.insert(4,'/');
+        dateString.insert(dateString.length()-2,'/');
+        return dateString.toString();
     }
 }

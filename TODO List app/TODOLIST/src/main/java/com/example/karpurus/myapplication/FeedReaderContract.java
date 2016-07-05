@@ -17,7 +17,7 @@ public class FeedReaderContract {
         public static final String COLUMN_NAME_ENTRY_ID = "id";
         public static final String COLUMN_NAME_TITLE = "name";
         public static final String COLUMN_NAME_PRIORITY = "priority";
-        public static final String COLUMN_NAME_DATE = "due date";
+        public static final String COLUMN_NAME_DATE = "due_date";
         public static final String COLUMN_NAME_NULLABLE = "null";
     }
 

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = " TEXT";
-    private static final String NUMBER = "INTEGER";
+    private static final String NUMBER = " INTEGER";
     private static final String COMMA_SEP = ",";
     // Creating a table
     private static final String SQL_CREATE_ENTRIES =
@@ -40,6 +40,10 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+
+    public void dropTable(SQLiteDatabase db){
+        db.execSQL(SQL_DELETE_ENTRIES);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);

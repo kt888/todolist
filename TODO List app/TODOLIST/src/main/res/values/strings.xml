@@ -1,7 +1,12 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Rutina</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="title_activity_task">TaskActivity</string>
     <string name="title_activity_add_update">AddUpdateActivity</string>
+    <string-array name="priority_array">
+        <item>high</item>
+        <item>low</item>
+        <item>medium</item>
+    </string-array>
 </resources>
