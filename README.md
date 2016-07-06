@@ -33,7 +33,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/kt888/todolist/blob/master/Rutina.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/kt888/todolist/blob/master/RutinaNewUI.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
